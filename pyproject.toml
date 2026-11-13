@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "elf-abi-diff"
+version = "0.1.0"
+description = "Review exported ELF symbol compatibility changes in CI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "mysteryljn"}]
+dependencies = []
+
+[project.scripts]
+elf-abi-diff = "elf_abi_diff.cli:main"
+
+[project.urls]
+Repository = "https://github.com/mysteryljn/elf-abi-diff"
+Issues = "https://github.com/mysteryljn/elf-abi-diff/issues"
+
+[tool.setuptools.packages.find]
+include = ["elf_abi_diff*"]
+
+[tool.setuptools.package-data]
+elf_abi_diff = ["fixtures/*"]
