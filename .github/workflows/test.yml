@@ -25,7 +25,7 @@ jobs:
       - run: python -c "import glob,subprocess,sys; subprocess.check_call([sys.executable,'-m','pip','install',glob.glob('dist/*.whl')[0]])"
       - run: python -m unittest discover -s tests -v
       - name: Installed demo outside source checkout
-        run: python -c "import subprocess,sys,tempfile; d=tempfile.mkdtemp(); subprocess.check_call([sys.executable,'-m','elf_abi_diff','demo','--output','report.html'],cwd=d)"
+        run: python -c "import pathlib,subprocess,sys,tempfile; d=pathlib.Path(tempfile.mkdtemp()); p=subprocess.run([sys.executable,'-m','elf_abi_diff','demo','--output','report.html'],cwd=d); assert p.returncode == 1; assert (d/'report.html').stat().st_size > 0"
       - uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.13'
         with:
